@@ -55,16 +55,23 @@ function YearStatistic() {
 				</select>
 			</div>
 			<LineChart
+			className={styles.canvas}
 				data={{
 					labels: keys,
 					datasets: [
 						{
 							label,
 							data: values,
+							tension:0.3
 						},
 					],
 				}}
-				options={{}}
+				options={{
+					responsive: true,
+					plugins:{
+						legend:false
+					}
+				}}
 			/>
 		</div>
 	);
