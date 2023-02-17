@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import styles from './Navigation.module.css'
+import styles from "./Navigation.module.css";
 
 const navigation = [
 	{
@@ -23,15 +23,15 @@ function Navigation() {
 		<div className={styles.navigation}>
 			<nav>
 				<ul className={styles.ul}>
-					{
-						navigation.map(({index, href, name})=>{
-							return(
-								<li key={index}  className={styles.li}>
-									<NavLink to={href}>{name}</NavLink>
-								</li>
-							)
-						})
-					}
+					{navigation.map(({ href, name }, index) => {
+						return (
+							<li key={index} className={styles.li}>
+								<NavLink className={styles.link} to={href}>
+									{name}
+								</NavLink>
+							</li>
+						);
+					})}
 				</ul>
 			</nav>
 		</div>
