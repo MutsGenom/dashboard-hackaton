@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import LineChart from "../LineChart/LineChart.jsx";
 
+import styles from "./YearStatistic.module.css";
+
 function YearStatistic() {
 	const [data, setData] = useState([]);
 	const [currentFactor, setCurrentFactor] = useState(0);
@@ -33,10 +35,11 @@ function YearStatistic() {
 	}, [currentFactor, data]);
 
 	return (
-		<div>
-			<div>
-				<h1>Годовая статистика</h1>
+		<div className={styles.wrap}>
+			<div className={styles.header}>
+				<h1>Статистика по годам</h1>
 				<select
+					className={styles.select}
 					value={currentFactor}
 					onChange={(e) => {
 						setCurrentFactor(e.target.value);
@@ -50,8 +53,6 @@ function YearStatistic() {
 						);
 					})}
 				</select>
-
-				<button>Скачать</button>
 			</div>
 			<LineChart
 				data={{
