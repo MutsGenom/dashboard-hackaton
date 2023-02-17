@@ -1,27 +1,40 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+
+import styles from './Navigation.module.css'
 
 const navigation = [
 	{
-		href: "/r1",
-		name: "r1",
+		href: "/form",
+		name: "Форма М1",
 	},
 	{
-		href: "/r2",
-		name: "r2",
+		href: "/goodness",
+		name: "Добро",
 	},
 	{
-		href: "/r3",
-		name: "r3",
+		href: "/population",
+		name: "Население",
 	},
 ];
 
 function Navigation() {
 	return (
-		<nav>
-			<ul>
-				<li>1</li>
-			</ul>
-		</nav>
+		<div className={styles.navigation}>
+			<nav>
+				<ul className={styles.ul}>
+					{
+						navigation.map(({index, href, name})=>{
+							return(
+								<li key={index}  className={styles.li}>
+									<NavLink to={href}>{name}</NavLink>
+								</li>
+							)
+						})
+					}
+				</ul>
+			</nav>
+		</div>
 	);
 }
 

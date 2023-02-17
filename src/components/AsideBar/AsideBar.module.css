@@ -1,0 +1,16 @@
+.asideBar{
+    max-width: 328px;
+}
+
+.asideBar_logo{
+   display: flex;
+   margin-top: 57px;
+   margin-left: 28px;
+   margin-right: 45px;
+   margin-bottom: 160px;
+}
+
+.logo{
+    width: 255px;
+    height: 62px;
+}
