@@ -1,3 +1,43 @@
 .header{
-    
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 50px;
+    margin-left: 32px;
+    margin-top: 20px;
+    border-bottom: 1px solid #C0C0C0;;
+}
+
+.div_title{
+    font-family: 'GT Eesti Pro Display Light';
+    font-weight: 300;
+    text-decoration: none;
+    font-size: 28px;
+    line-height: 38px;
+    letter-spacing: 0.1em;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.div_title h1{
+    margin-bottom: 0px;
+}
+
+.button{   
+    width: 377px;
+    height: 70px;
+    border: none;
+    background: #DAEF14;
+    border-radius: 3px;
+}
+
+.button span{
+    font-family: 'GT Eesti Pro Display Light';
+    font-weight: 300;
+    text-decoration: none;
+    font-size: 28px;
+    line-height: 38px;
+    letter-spacing: 0.1em;
+    color: #000000;
 }
