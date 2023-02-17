@@ -56,6 +56,7 @@ function YearStatistic() {
 			</div>
 			<LineChart
 				className={styles.canvas}
+				width={347}
 				data={{
 					labels: keys,
 					datasets: [

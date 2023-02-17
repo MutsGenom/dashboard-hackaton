@@ -4,12 +4,18 @@ import "chart.js/auto";
 
 import DownloadChartButton from "../DownloadChartButton/DownloadChartButton.jsx";
 
-function LineChart({ data, options }) {
+function LineChart({ width, heigth, data, options }) {
 	let chartRef = useRef(null);
 
 	return (
 		<div>
-			<Line ref={chartRef} data={data} options={options}></Line>
+			<Line
+				width={width}
+				height={heigth}
+				ref={chartRef}
+				data={data}
+				options={options}
+			></Line>
 			<DownloadChartButton chartRef={chartRef} />
 		</div>
 	);
