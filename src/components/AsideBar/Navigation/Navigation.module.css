@@ -19,6 +19,8 @@
 }
 
 .link{
+    font-family: 'GT Eesti Pro Display Light';
+    font-weight: 300;
     text-decoration: none;
     font-size: 28px;
     line-height: 38px;

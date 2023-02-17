@@ -1,5 +1,11 @@
-function Form(){
-    return null
+import YearStatistic from "../YearStatistic/YearStatistic.jsx";
+
+function Form() {
+	return (
+		<div>
+			<YearStatistic />
+		</div>
+	);
 }
 
-export default Form
+export default Form;

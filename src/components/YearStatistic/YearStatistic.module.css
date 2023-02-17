@@ -1,10 +1,14 @@
 
 .wrap{
+    font-family: 'GT Eesti Pro Display Light';
+    font-style: normal;
+    font-weight: 300;
     max-width: 640px;
     max-height: 350px;
     padding: 25px 20px;
-    background-color: rgb(223, 223, 223);
+    background-color: white;
     border-radius: 10px;
+    filter: drop-shadow(10px 16px 27px rgba(0, 0, 0, 0.1));
 }
 
 .header{
@@ -31,7 +35,7 @@ select {
   }
 
 .header h1{
-    font-family: 'GT Eesti Pro Display';
+    font-family: 'GT Eesti Pro Display Light';
     font-style: normal;
     font-weight: 300;
     font-size: 24px;
