@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 function DownloadChartButton({ chartRef }) {
 	const downloadChart = useCallback(() => {

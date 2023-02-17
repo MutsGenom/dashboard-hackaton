@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
+import DownloadChartButton from "../DownloadChartButton/DownloadChartButton";
 
 function BarChart({ data, options }) {
+	let chartRef = useRef(null);
+
 	return (
 		<div>
-			<Bar data={data} options={options}></Bar>
+			<Bar ref={chartRef} data={data} options={options}></Bar>
+			<DownloadChartButton chartRef={chartRef} />
 		</div>
 	);
 }
