@@ -5,6 +5,10 @@ function YearStatistic() {
 	const [data, setData] = useState([]);
 	const [currentFactor, setCurrentFactor] = useState(0);
 
+	const [keys, setKeys] = useState([])
+	const [values, setValues] = useState([])
+	const [label, setLabel] = useState("")
+
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
@@ -17,11 +21,27 @@ function YearStatistic() {
 
 			setData(result);
 			console.log("state: ", result);
+
 		}
 		getData();
 	}, []);
 
 	function renderChart() {}
+
+	useEffect(()=>{
+		// console.log(curre)
+		try{
+			if(Object.keys(data[currentFactor]) ){
+				setKeys(Object.keys(data[currentFactor]).slice(0,-1))
+				setValues(Object.values(data[currentFactor]).slice(0,-1))
+				setLabel(Object.values(data[currentFactor]).slice(-1))
+			}else{
+				console.log('nthn')
+			}
+		}catch(er){
+
+		}
+	},[currentFactor])
 
 	return (
 		<div>
@@ -41,19 +61,21 @@ function YearStatistic() {
 						);
 					})}
 				</select>
+
 				<button>Скачать</button>
 			</div>
-			{/* <LineChart
+			<LineChart
 				data={{
-					labels: Object.keys(data[currentFactor]).pop(),
+					labels: keys,
 					datasets: [
 						{
-							data: Object.values(data[currentFactor]).pop(),
+							label,
+							data: values,
 						},
 					],
 				}}
 				options={{}}
-			/> */}
+			/>
 		</div>
 	);
 }
