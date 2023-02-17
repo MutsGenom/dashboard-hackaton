@@ -5,9 +5,9 @@ function YearStatistic() {
 	const [data, setData] = useState([]);
 	const [currentFactor, setCurrentFactor] = useState(0);
 
-	const [keys, setKeys] = useState([])
-	const [values, setValues] = useState([])
-	const [label, setLabel] = useState("")
+	const [keys, setKeys] = useState([]);
+	const [values, setValues] = useState([]);
+	const [label, setLabel] = useState("");
 
 	useEffect(() => {
 		async function getData() {
@@ -20,28 +20,17 @@ function YearStatistic() {
 			const result = JSON.parse(await serverData.text());
 
 			setData(result);
-			console.log("state: ", result);
-
 		}
 		getData();
 	}, []);
 
-	function renderChart() {}
-
-	useEffect(()=>{
-		// console.log(curre)
-		try{
-			if(Object.keys(data[currentFactor]) ){
-				setKeys(Object.keys(data[currentFactor]).slice(0,-1))
-				setValues(Object.values(data[currentFactor]).slice(0,-1))
-				setLabel(Object.values(data[currentFactor]).slice(-1))
-			}else{
-				console.log('nthn')
-			}
-		}catch(er){
-
-		}
-	},[currentFactor])
+	useEffect(() => {
+		try {
+			setKeys(Object.keys(data[currentFactor]).slice(0, -1));
+			setValues(Object.values(data[currentFactor]).slice(0, -1));
+			setLabel(Object.values(data[currentFactor]).slice(-1));
+		} catch (er) {}
+	}, [currentFactor, data]);
 
 	return (
 		<div>
