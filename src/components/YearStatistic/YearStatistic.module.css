@@ -46,6 +46,3 @@ select {
 .select{
     max-width: 315px;
 }
-canvas{
-    height: 240px !important;
-}

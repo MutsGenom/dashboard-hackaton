@@ -55,8 +55,8 @@ function YearStatistic() {
 				</select>
 			</div>
 			<LineChart
-				className={styles.canvas}
 				width={347}
+				heigth={135}
 				data={{
 					labels: keys,
 					datasets: [
@@ -64,6 +64,9 @@ function YearStatistic() {
 							label,
 							data: values,
 							tension: 0.3,
+							backgroundColor: "rgb(157, 125, 224, 0.2)",
+							borderColor: "#9D7DE0",
+							fill: true,
 						},
 					],
 				}}
