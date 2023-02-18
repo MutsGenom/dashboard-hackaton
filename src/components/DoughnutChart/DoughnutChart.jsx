@@ -4,12 +4,18 @@ import "chart.js/auto";
 
 import DownloadChartButton from "../DownloadChartButton/DownloadChartButton";
 
-function DoughnutChart({ data, options }) {
+function DoughnutChart({ width, height, data, options }) {
 	let chartRef = useRef(null);
 
 	return (
 		<div>
-			<Doughnut ref={chartRef} data={data} options={options} />
+			<Doughnut
+				width={width}
+				height={height}
+				ref={chartRef}
+				data={data}
+				options={options}
+			/>
 			<DownloadChartButton chartRef={chartRef} />
 		</div>
 	);
