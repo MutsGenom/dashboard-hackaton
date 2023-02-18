@@ -24,10 +24,12 @@ function BudgetAllocationStatistic() {
 
 	const [regions, setRegions] = useState([]);
 
-	function chooseRegion() {
+	function chooseRegion(region) {
 		let sortedByRegion1 = [];
 		data.forEach((el) => {
-			if (el["Регион"] == regions[currentRegion]) {
+			console.log(el);
+			console.log(regions[region]);
+			if (el["Регион"] == regions[region]) {
 				sortedByRegion1.push(el);
 			}
 		});
@@ -63,11 +65,6 @@ function BudgetAllocationStatistic() {
 		let labelToChart = [];
 		console.log(sortedByRegion);
 		sortedByRegion.forEach((el, index) => {
-			// valuesToChart.push(el[metrics[currentMetric]]);
-			// labelToChart.push(
-			// 	el["Направления реализации государственной молодeжной политики"]
-			// );
-
 			if (
 				!el[
 					"Направления реализации государственной молодeжной политики"
@@ -107,7 +104,7 @@ function BudgetAllocationStatistic() {
 					value={currentRegion}
 					onChange={(e) => {
 						setCurrentRegion(e.target.value);
-						chooseRegion();
+						chooseRegion(e.target.value);
 					}}
 				>
 					{regions.map((region, id) => {
