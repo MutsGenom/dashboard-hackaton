@@ -26,7 +26,14 @@ function Navigation() {
 					{navigation.map(({ href, name }, index) => {
 						return (
 							<li key={index} className={styles.li}>
-								<NavLink className={styles.link} to={href}>
+								<NavLink
+									className={({ isActive }) =>
+										isActive
+											? `${styles.link} ${styles.active}`
+											: styles.link
+									}
+									to={href}
+								>
 									{name}
 								</NavLink>
 							</li>

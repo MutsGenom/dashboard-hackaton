@@ -1,4 +1,10 @@
 .button{
     background: none;
     border: none;
+    cursor: pointer;
+}
+
+.button:hover{
+    transition: .2s;
+    filter: invert(80%) sepia(100%) saturate(449%) hue-rotate(6deg) brightness(99%) contrast(90%);
 }
