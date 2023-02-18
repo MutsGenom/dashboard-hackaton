@@ -8,8 +8,8 @@ function Form() {
 	return (
 		<div className={styles.form}>
 			<YearStatistic />
-			<BudgetAllocationStatistic />
 			<ResourceStatistics />
+			<BudgetAllocationStatistic />
 		</div>
 	);
 }

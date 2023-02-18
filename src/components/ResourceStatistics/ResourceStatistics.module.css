@@ -1,0 +1,35 @@
+.resourceStatistics{
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    height: max-content;
+    font-family: 'GT Eesti Pro Display Light';
+    max-width: 600px;
+    height: max-content;
+    padding: 25px 20px;
+    background-color: white;
+    border-radius: 10px;
+    filter: drop-shadow(10px 16px 27px rgba(0, 0, 0, 0.1));
+}
+
+.header{
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    /* justify-content: left; */
+}
+
+.wrap h1 {
+    font-family: 'GT Eesti Pro Display Light';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.1em;
+}

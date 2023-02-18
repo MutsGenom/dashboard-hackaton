@@ -17,6 +17,7 @@ function YouthFromAllVolunteersjsxjsx() {
 					},
 				}
 			);
+			console.log(await servData.json());
 			const resp = await servData.json();
 
 			const youthPrecent =

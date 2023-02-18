@@ -5,14 +5,18 @@ import "chart.js/auto";
 import DownloadChartButton from "../DownloadButtons/DownloadChartButton/DownloadChartButton.jsx";
 import DownloadTableButton from "../DownloadButtons/DownloadTableButton/DownloadTableButton.jsx";
 
+import styles from './BarChart.module.css'
+
 function BarChart({ data, options }) {
 	let chartRef = useRef(null);
 
 	return (
-		<div>
+		<div className={styles.barChart}>
 			<Bar ref={chartRef} data={data} options={options}></Bar>
-			<DownloadChartButton chartRef={chartRef} />
-			<DownloadTableButton chartRef={chartRef} />
+			<div className={styles.buttons}>
+				<DownloadChartButton chartRef={chartRef} />
+				<DownloadTableButton chartRef={chartRef} />
+			</div>
 		</div>
 	);
 }

@@ -13,7 +13,7 @@ function Header() {
 		formData.append("extension", "xlsx");
 		formData.append("dataset", file);
 
-		const res = await fetch("http://192.168.193.189:7000/dataset", {
+		const res = await fetch("http://192.168.193.36:7000/dataset", {
 			method: "POST",
 			body: formData,
 			redirect: "follow",

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import styles from "./BudgetAllocationStatistic.module.css";
 import BarChart from "../BarChart/BarChart.jsx";
 import { AppContext } from "../../context/context";
+import LineChart from "../LineChart/LineChart";
 
 function BudgetAllocationStatistic() {
 	const [{ link }] = useContext(AppContext);
@@ -26,7 +27,7 @@ function BudgetAllocationStatistic() {
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
-				`http://192.168.193.189:7000/dataset/page/${link}/xlsx/Р1`,
+				`http://192.168.193.36:7000/dataset/page/${link}/xlsx/Р1`,
 				{
 					method: "GET",
 				}
@@ -35,7 +36,7 @@ function BudgetAllocationStatistic() {
 			setData(result);
 
 			const regionsData = await fetch(
-				`http://192.168.193.189:7000/dataset/${link}/regions`,
+				`http://192.168.193.36:7000/dataset/${link}/regions`,
 				{
 					method: "GET",
 				}
@@ -127,14 +128,16 @@ function BudgetAllocationStatistic() {
 				</select>
 			</div>
 			<BarChart
-				width={700}
-				height={500}
+				width={100}
+				height={100}
 				data={{
 					labels: keys,
 					datasets: [
 						{
 							label,
 							data: values,
+							backgroundColor: "#b69ee8",
+							borderColor: "#9D7DE0",
 						},
 					],
 				}}

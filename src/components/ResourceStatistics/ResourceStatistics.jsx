@@ -2,6 +2,7 @@ import { getValue } from '@testing-library/user-event/dist/utils';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import DoughnutChart from '../DoughnutChart/DoughnutChart';
+import PieChart from '../PieChart/PieChart';
 
 import styles from './ResourceStatistics.module.css'
 
@@ -21,7 +22,7 @@ function ResourceStatistics() {
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
-				"http://192.168.193.189:7000/dataset/page/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/title/Р7",
+				"http://192.168.193.36:7000/dataset/page/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/title/Р7",
 				{
 					method: "GET",
 				}
@@ -112,7 +113,51 @@ function ResourceStatistics() {
 
 
 	return (
-		<div className={styles.wrap}>
+        <div className={styles.resourceStatistics}>
+            <div className={styles.wrap}>
+                <div className={styles.header}>
+                    <h1>Диаграмма волонтерства</h1>
+                    <select
+                        className={styles.selectModule}
+                        value={currentFactorModule}
+                        onChange={(e) => {
+                            setCurrentFactorModule(e.target.value);
+                            setActiveModule(e.target.options[e.target.selectedIndex].textContent)
+                            setKeys(indicators[e.target.value][e.target.options[e.target.selectedIndex].textContent])
+                        }}
+                    >
+                        {modules.map((module, id) => {
+                            return (
+                                <option key={id} value={id}>
+                                    {module}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </div>
+                <PieChart
+                    // width={300}
+                    // heigth={100}
+                    data={{
+                        labels: keys,
+                        datasets: [
+                            {
+                                data: data,
+                                tension: 0.3,
+                                backgroundColor: ['#9d7de0','#a588e3','#ad93e5', '#b69ee8','#bea8ea','#c6b3ed','#cebef0','#d6c9f2','#ded4f5','#e7dff7','#efe9fa','#f7f4fc'],
+                                borderColor: ['#9d7de0','#a588e3','#ad93e5', '#b69ee8','#bea8ea','#c6b3ed','#cebef0','#d6c9f2','#ded4f5','#e7dff7','#efe9fa','#f7f4fc'],
+                                fill: true,
+                            },
+                        ],
+                    }}
+                    options={{
+                        responsive: true,
+                        plugins: {
+                            legend: true,
+                        },
+                    }}/>
+            </div>
+            <div className={styles.wrap}>
 			<div className={styles.header}>
 				<h1>Диаграмма волонтерства</h1>
                 <select
@@ -133,17 +178,17 @@ function ResourceStatistics() {
 					})}
 				</select>
 			</div>
-			<DoughnutChart 
-                width={347}
-				heigth={135}
+			<DoughnutChart
+                // width={300}
+				// heigth={100}
 				data={{
 					labels: keys,
 					datasets: [
 						{
 							data: data,
 							tension: 0.3,
-							backgroundColor: ['#00429d', '#2e59a8', '#4771b2', '#5d8abd', '#73a2c6', '#8abccf', '#a5d5d8', '#c5eddf', '#ffffe0'],
-							borderColor: ['#00429d', '#2e59a8', '#4771b2', '#5d8abd', '#73a2c6', '#8abccf', '#a5d5d8', '#c5eddf', '#ffffe0'],
+							backgroundColor: ['#9d7de0','#a588e3','#ad93e5', '#b69ee8','#bea8ea','#c6b3ed','#cebef0','#d6c9f2','#ded4f5','#e7dff7','#efe9fa','#f7f4fc'],
+							borderColor: ['#9d7de0','#a588e3','#ad93e5', '#b69ee8','#bea8ea','#c6b3ed','#cebef0','#d6c9f2','#ded4f5','#e7dff7','#efe9fa','#f7f4fc'],
 							fill: true,
 						},
 					],
@@ -155,6 +200,8 @@ function ResourceStatistics() {
 					},
 				}}/>
 		</div>
+        </div>
+		
 	);
 }
 
