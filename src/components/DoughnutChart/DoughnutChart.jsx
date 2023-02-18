@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { Doughnut } from "react-chartjs-2";
 import "chart.js/auto";
-import DownloadChartButton from "../DownloadButtons/DownloadChartButton/DownloadChartButton.jsx";
-import DownloadTableButton from "../DownloadButtons/DownloadTableButton/DownloadTableButton.jsx";
+import DownloadChartButton from "../DownloadButtons/DownloadChartButton/DownloadChartButton";
+import DownloadTableButton from "../DownloadButtons/DownloadTableButton/DownloadTableButton";
 
 import styles from "./DoughnutChart.module.css";
 
