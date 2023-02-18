@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+import { AppContext } from "../../context/context";
 
 import styles from "./Header.module.css";
 
 function Header() {
+	const [{ link }, dispatch] = useContext(AppContext);
 	const filePicker = useRef(null);
 
 	async function handleChange(event) {
@@ -17,7 +19,8 @@ function Header() {
 			redirect: "follow",
 		});
 		const data = await res.text();
-		localStorage.setItem("fileName", data);
+		localStorage.setItem("link", data);
+		dispatch({ type: "SET_LINK", payload: data });
 	}
 
 	function handlePick() {

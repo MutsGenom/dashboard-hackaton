@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AppContext } from "../../context/context.js";
 import LineChart from "../LineChart/LineChart.jsx";
 
 import styles from "./YearStatistic.module.css";
 
 function YearStatistic() {
+	const [{ link }] = useContext(AppContext);
 	const [data, setData] = useState([]);
 	const [currentFactor, setCurrentFactor] = useState(0);
-
 	const [keys, setKeys] = useState([]);
 	const [values, setValues] = useState([]);
 	const [label, setLabel] = useState("");
@@ -14,7 +15,7 @@ function YearStatistic() {
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
-				"http://192.168.193.189:7000/dataset/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/yearsStat/",
+				`http://192.168.193.189:7000/dataset/${link}/yearsStat/`,
 				{
 					method: "GET",
 				}
@@ -24,7 +25,7 @@ function YearStatistic() {
 			setData(result);
 		}
 		getData();
-	}, []);
+	}, [link]);
 
 	useEffect(() => {
 		try {

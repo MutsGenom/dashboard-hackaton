@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./BudgetAllocationStatistic.module.css";
 import BarChart from "../BarChart/BarChart.jsx";
+import { AppContext } from "../../context/context";
 
 function BudgetAllocationStatistic() {
+	const [{ link }] = useContext(AppContext);
 	const [data, setData] = useState([]);
 	const [currentRegion, setCurrentRegion] = useState(0);
 	const [currentMetric, setCurrentMetric] = useState(0);
-
 	const [keys, setKeys] = useState([]);
 	const [values, setValues] = useState([]);
 	const [label, setLabel] = useState("");
@@ -25,7 +26,7 @@ function BudgetAllocationStatistic() {
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
-				"http://192.168.193.189:7000/dataset/page/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/xlsx/Р1",
+				`http://192.168.193.189:7000/dataset/page/${link}/xlsx/Р1`,
 				{
 					method: "GET",
 				}
@@ -35,7 +36,7 @@ function BudgetAllocationStatistic() {
 			setData(result);
 
 			const regionsData = await fetch(
-				"http://192.168.193.189:7000/dataset/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/regions",
+				`http://192.168.193.189:7000/dataset/${link}/regions`,
 				{
 					method: "GET",
 				}
@@ -44,7 +45,7 @@ function BudgetAllocationStatistic() {
 			setRegions(regions);
 		}
 		getData();
-	}, []);
+	}, [link]);
 
 	useEffect(() => {
 		let valuesToChart = [];
