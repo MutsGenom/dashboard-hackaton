@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import styles from "./BudgetAllocationStatistic.module.css";
-import BarChart from "../BarChart/BarChart.jsx"
+import BarChart from "../BarChart/BarChart.jsx";
 
 function BudgetAllocationStatistic() {
-    const [data, setData] = useState([]);
+	const [data, setData] = useState([]);
 	const [currentRegion, setCurrentRegion] = useState(0);
 	const [currentMetric, setCurrentMetric] = useState(0);
 
@@ -11,7 +11,7 @@ function BudgetAllocationStatistic() {
 	const [values, setValues] = useState([]);
 	const [label, setLabel] = useState("");
 
-	const [sortedByRegion, setSortedByRegion] = useState([])
+	const [sortedByRegion, setSortedByRegion] = useState([]);
 
 	const metrics = [
 		"Бюджет МО, руб",
@@ -19,24 +19,22 @@ function BudgetAllocationStatistic() {
 		"Бюджет грантов, руб",
 		"Кол-во грантов",
 		"Количество детских и молодeжных общественных объединений, работающих по данному ",
-		"Направления реализации государственной молодeжной политики",
-		"Численность молодeжи, задействованной в программных мероприятиях по направлению"
-	]
+		"Численность молодeжи, задействованной в программных мероприятиях по направлению",
+	];
 
-	const [regions,setRegions] = useState([])
+	const [regions, setRegions] = useState([]);
 
-
-	function chooseRegion(){
-		let sortedByRegion = [];
-		data.forEach((el,index) => {
-			if(el["Регион"] == regions[currentRegion]){
-				sortedByRegion.push(el)
+	function chooseRegion() {
+		let sortedByRegion1 = [];
+		data.forEach((el) => {
+			if (el["Регион"] == regions[currentRegion]) {
+				sortedByRegion1.push(el);
 			}
 		});
-		setSortedByRegion(sortedByRegion)
+		setSortedByRegion(sortedByRegion1);
 	}
 
-    useEffect(() => {
+	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
 				"http://192.168.193.189:7000/dataset/page/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/xlsx/Р1",
@@ -45,8 +43,8 @@ function BudgetAllocationStatistic() {
 				}
 			);
 			const result = JSON.parse(await serverData.text());
+			console.log(result);
 			setData(result);
-
 
 			const regionsData = await fetch(
 				"http://192.168.193.189:7000/dataset/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/regions",
@@ -55,36 +53,61 @@ function BudgetAllocationStatistic() {
 				}
 			);
 			const regions = JSON.parse(await regionsData.text());
-			setRegions(regions)
+			setRegions(regions);
 		}
 		getData();
 	}, []);
 
-
 	useEffect(() => {
 		let valuesToChart = [];
 		let labelToChart = [];
+		console.log(sortedByRegion);
+		sortedByRegion.forEach((el, index) => {
+			// valuesToChart.push(el[metrics[currentMetric]]);
+			// labelToChart.push(
+			// 	el["Направления реализации государственной молодeжной политики"]
+			// );
 
-		sortedByRegion.forEach((el,index)=>{
-			valuesToChart.push(el[metrics[currentMetric]])
-			labelToChart.push(el["Направления реализации государственной молодeжной политики"])
-			console.log(el["Направления реализации государственной молодeжной политики"])
-		})
-		setValues(valuesToChart)
-		setKeys(labelToChart)
-	}, [currentRegion,currentMetric, data]);
+			if (
+				!el[
+					"Направления реализации государственной молодeжной политики"
+				].startsWith("  ")
+			) {
+				valuesToChart.push(el[metrics[currentMetric]]);
+				if (
+					!el[
+						"Направления реализации государственной молодeжной политики"
+					].endsWith(", в том числе:")
+				) {
+					labelToChart.push(
+						el[
+							"Направления реализации государственной молодeжной политики"
+						]
+					);
+				} else {
+					labelToChart.push(
+						el[
+							"Направления реализации государственной молодeжной политики"
+						].replace(", в том числе:", "")
+					);
+				}
+			}
+			console.log(el);
+		});
+		setValues(valuesToChart);
+		setKeys(labelToChart);
+	}, [currentRegion, currentMetric, data]);
 
-
-  return (
-    <div className={styles.wrap}>
+	return (
+		<div className={styles.wrap}>
 			<div className={styles.header}>
-				<h1>Статистика по годам</h1>
+				<h1>Распределение бюджета</h1>
 				<select
 					className={styles.select}
 					value={currentRegion}
 					onChange={(e) => {
 						setCurrentRegion(e.target.value);
-						chooseRegion()
+						chooseRegion();
 					}}
 				>
 					{regions.map((region, id) => {
@@ -94,7 +117,6 @@ function BudgetAllocationStatistic() {
 							</option>
 						);
 					})}
-
 				</select>
 
 				<select
@@ -104,7 +126,7 @@ function BudgetAllocationStatistic() {
 						setCurrentMetric(e.target.value);
 					}}
 				>
-					{metrics.map((metric , id) => {
+					{metrics.map((metric, id) => {
 						return (
 							<option key={id} value={id}>
 								{metric}
@@ -114,30 +136,34 @@ function BudgetAllocationStatistic() {
 				</select>
 			</div>
 			<BarChart
-				className={styles.canvas}
-				width={1047}
-				height={1547}
+				width={700}
+				height={500}
 				data={{
 					labels: keys,
 					datasets: [
 						{
 							label,
 							data: values,
-							tension: 0.3,
 						},
 					],
 				}}
 				options={{
 					responsive: true,
+					// scales: {
+					// 	y: {
+					// 		ticks: {
+					// 			display: false,
+					// 		},
+					// 	},
+					// },
 					plugins: {
 						legend: false,
 					},
-					indexAxis:"y",
-					maintainAspectRatio: false
+					indexAxis: "y",
 				}}
 			/>
 		</div>
-  )
+	);
 }
 
 export default BudgetAllocationStatistic;
