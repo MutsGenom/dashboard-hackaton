@@ -10,7 +10,7 @@ function BudgetAllocationStatistic() {
 	const [keys, setKeys] = useState([]);
 	const [values, setValues] = useState([]);
 	const [label, setLabel] = useState("");
-
+	const [regions, setRegions] = useState([]);
 	const [sortedByRegion, setSortedByRegion] = useState([]);
 
 	const metrics = [
@@ -21,20 +21,6 @@ function BudgetAllocationStatistic() {
 		" Количество детских и молодeжных общественных объединений, работающих по данному ",
 		" Численность молодeжи, задействованной в программных мероприятиях по направлению ",
 	];
-
-	const [regions, setRegions] = useState([]);
-
-	function chooseRegion(region) {
-		let sortedByRegion1 = [];
-		data.forEach((el) => {
-			console.log(el);
-			console.log(regions[region]);
-			if (el["Регион"] == regions[region]) {
-				sortedByRegion1.push(el);
-			}
-		});
-		setSortedByRegion(sortedByRegion1);
-	}
 
 	useEffect(() => {
 		async function getData() {
@@ -94,6 +80,18 @@ function BudgetAllocationStatistic() {
 		setValues(valuesToChart);
 		setKeys(labelToChart);
 	}, [currentRegion, currentMetric, data]);
+
+	function chooseRegion(region) {
+		let sortedByRegion1 = [];
+		data.forEach((el) => {
+			console.log(el);
+			console.log(regions[region]);
+			if (el["Регион"] == regions[region]) {
+				sortedByRegion1.push(el);
+			}
+		});
+		setSortedByRegion(sortedByRegion1);
+	}
 
 	return (
 		<div className={styles.wrap}>
