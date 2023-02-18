@@ -53,7 +53,6 @@ function ResourceStatistics() {
                     break
                 }
 
-                // [{key: []},{key: []},{key: []}]
 
                 if(arrayIndicators[el].includes(":")){
                     const object = new Object()
@@ -69,7 +68,6 @@ function ResourceStatistics() {
                 newArray[counter][key].push(arrayIndicators[el])
             }
 
-            // console.log(arrayOption);
             const arrayValues = []
             for (const op of arrayOption) {
                 const object = new Object()
@@ -98,7 +96,6 @@ function ResourceStatistics() {
 
     useEffect(()=>{
         try {
-            console.log(keys);
             const array = []
             for(const el in keys){
                 for(const i in values){

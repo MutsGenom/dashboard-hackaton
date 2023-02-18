@@ -32,7 +32,6 @@ function BudgetAllocationStatistic() {
 				}
 			);
 			const result = JSON.parse(await serverData.text());
-			console.log(result);
 			setData(result);
 
 			const regionsData = await fetch(
@@ -50,7 +49,6 @@ function BudgetAllocationStatistic() {
 	useEffect(() => {
 		let valuesToChart = [];
 		let labelToChart = [];
-		console.log(sortedByRegion);
 		sortedByRegion.forEach((el, index) => {
 			if (
 				!el[
@@ -76,7 +74,6 @@ function BudgetAllocationStatistic() {
 					);
 				}
 			}
-			console.log(el);
 		});
 		setValues(valuesToChart);
 		setKeys(labelToChart);
@@ -85,8 +82,6 @@ function BudgetAllocationStatistic() {
 	function chooseRegion(region) {
 		let sortedByRegion1 = [];
 		data.forEach((el) => {
-			console.log(el);
-			console.log(regions[region]);
 			if (el["Регион"] == regions[region]) {
 				sortedByRegion1.push(el);
 			}
@@ -145,13 +140,6 @@ function BudgetAllocationStatistic() {
 				}}
 				options={{
 					responsive: true,
-					// scales: {
-					// 	y: {
-					// 		ticks: {
-					// 			display: false,
-					// 		},
-					// 	},
-					// },
 					plugins: {
 						legend: false,
 					},
