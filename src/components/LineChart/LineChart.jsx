@@ -2,7 +2,10 @@ import React, { useRef } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 
-import DownloadChartButton from "../DownloadChartButton/DownloadChartButton.jsx";
+import DownloadChartButton from "../DownloadButtons/DownloadChartButton/DownloadChartButton";
+import DownloadTableButton from "../DownloadButtons/DownloadTableButton/DownloadTableButton";
+
+import styles from './LineChart.module.css'
 
 function LineChart({ width, heigth, data, options }) {
 	let chartRef = useRef(null);
@@ -16,7 +19,10 @@ function LineChart({ width, heigth, data, options }) {
 				data={data}
 				options={options}
 			></Line>
-			<DownloadChartButton chartRef={chartRef} />
+			<div className={styles.footer}>
+				<DownloadChartButton chartRef={chartRef} />
+				<DownloadTableButton chartRef={chartRef}/>
+			</div>
 		</div>
 	);
 }
