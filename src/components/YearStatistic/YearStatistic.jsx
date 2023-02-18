@@ -34,6 +34,10 @@ function YearStatistic() {
 		} catch (er) {}
 	}, [currentFactor, data]);
 
+	const inline_style = {
+		position: "relative",
+	}
+
 	return (
 		<div className={styles.wrap}>
 			<div className={styles.header}>
@@ -55,6 +59,7 @@ function YearStatistic() {
 				</select>
 			</div>
 			<LineChart
+				inline_style = {inline_style}
 				className={styles.canvas}
 				width={347}
 				data={{

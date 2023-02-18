@@ -5,7 +5,7 @@ import  styles from "./LineChart.css"
 
 import DownloadChartButton from "../DownloadChartButton/DownloadChartButton.jsx";
 
-function LineChart({ width, heigth, data, options }) {
+function LineChart({inline_style, width, heigth, data, options }) {
 	let chartRef = useRef(null);
 
 	return (
@@ -17,7 +17,7 @@ function LineChart({ width, heigth, data, options }) {
 				data={data}
 				options={options}
 			></Line>
-			<DownloadChartButton id="btn_downloadChart" chartRef={chartRef} />
+			<DownloadChartButton inline_style={inline_style} chartRef={chartRef} />
 		</div>
 	);
 }
