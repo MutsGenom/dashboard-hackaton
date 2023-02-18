@@ -3,19 +3,27 @@
 }
 
 .ul{
+    display: block;
     margin: 0;
     padding: 0;
-    display: grid;
     justify-content: center;
 }
 
-.ul li:not(:last-child){
+/* .ul li:not(:last-child){
     margin-bottom: 20px;
-}
+} */
 
 .li{
+    display: flex;
+    justify-content: center;
+    width: 100%;
     list-style: none;
+    padding: 10px 0px 10px 0px;
     font-size: 28px;
+}
+
+.li:hover{
+    background-color: #dbdbdb;
 }
 
 .link{
