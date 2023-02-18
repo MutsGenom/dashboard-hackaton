@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 
 import styles from "./DownloadChartButton.module.css";
 
-function DownloadChartButton({ chartRef }) {
+function DownloadChartButton({ id, chartRef }) {
 	const downloadChart = useCallback(() => {
 		const link = document.createElement("a");
 		link.download = "chart.png";
@@ -11,7 +11,7 @@ function DownloadChartButton({ chartRef }) {
 	}, []);
 
 	return (
-		<button className={styles.button} onClick={downloadChart}>
+		<button id={id} className={styles.button} onClick={downloadChart}>
 			<img src="/assets/download.svg" alt="" />
 		</button>
 	);
