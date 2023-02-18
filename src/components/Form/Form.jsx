@@ -1,4 +1,5 @@
 import YearStatistic from "../YearStatistic/YearStatistic.jsx";
+import BudgetAllocationStatistic from "../BudgetAllocationStatistic/BudgetAllocationStatistic.jsx";
 
 import styles from './Form.module.css'
 
@@ -13,6 +14,7 @@ function Form() {
 			<YearStatistic />
 			<YearStatistic />
 			<YearStatistic />
+			<BudgetAllocationStatistic/>
 		</div>
 	);
 }
