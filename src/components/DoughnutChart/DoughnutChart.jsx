@@ -1,15 +1,27 @@
 import React, { useRef } from "react";
 import { Doughnut } from "react-chartjs-2";
 import "chart.js/auto";
-import DownloadChartButton from "../DownloadChartButton/DownloadChartButton";
+import DownloadChartButton from "../DownloadButtons/DownloadChartButton/DownloadChartButton.jsx";
+import DownloadTableButton from "../DownloadButtons/DownloadTableButton/DownloadTableButton.jsx";
 
-function DoughnutChart({ data, options }) {
+import styles from "./DoughnutChart.module.css";
+
+function DoughnutChart({ style, width, heigth, data, options }) {
 	let chartRef = useRef(null);
 
 	return (
-		<div className={styles.footer_chart}>
-			<Doughnut ref={chartRef} data={data} options={options} />
-			<DownloadChartButton chartRef={chartRef} />
+		<div style={style}>
+			<Doughnut
+				width={width}
+				height={heigth}
+				ref={chartRef}
+				data={data}
+				options={options}
+			></Doughnut>
+			<div className={styles.footer}>
+				<DownloadChartButton chartRef={chartRef} />
+				<DownloadTableButton chartRef={chartRef} />
+			</div>
 		</div>
 	);
 }
