@@ -18,6 +18,8 @@ function ResourceStatistics() {
 	const [values, setValues] = useState();
 	const [data, setData] = useState();
 
+	const niceName = ['Количество государственных учреждений на территории РФ', 'Общая численность граждан, вовлеченных центрами']
+
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
@@ -126,20 +128,19 @@ function ResourceStatistics() {
 					onChange={(e) => {
 						setCurrentFactorModule(e.target.value);
 						setActiveModule(
-							e.target.options[e.target.selectedIndex].textContent
+							modules[e.target.selectedIndex]
 						);
 						setKeys(
 							indicators[e.target.value][
-								e.target.options[e.target.selectedIndex]
-									.textContent
+								modules[e.target.selectedIndex]
 							]
 						);
 					}}
 				>
-					{modules.map((module, id) => {
+					{niceName.map((name, id) => {
 						return (
 							<option key={id} value={id}>
-								{module}
+								{name}
 							</option>
 						);
 					})}
@@ -153,32 +154,30 @@ function ResourceStatistics() {
 							data: data,
 							tension: 0.3,
 							backgroundColor: [
-								"#9d7de0",
-								"#a588e3",
-								"#ad93e5",
-								"#b69ee8",
-								"#bea8ea",
-								"#c6b3ed",
-								"#cebef0",
-								"#d6c9f2",
-								"#ded4f5",
-								"#e7dff7",
-								"#efe9fa",
-								"#f7f4fc",
+								'#D29CFF',
+								'#C177FF',
+								'#B255FF',
+								'#A436FF',
+								'#971AFF',
+								'#8B00FF',
+								'#7D00E6',
+								'#7100CF',
+								'#6600BA',
+								'#5C00A7',
+								'#530096'
 							],
 							borderColor: [
-								"#9d7de0",
-								"#a588e3",
-								"#ad93e5",
-								"#b69ee8",
-								"#bea8ea",
-								"#c6b3ed",
-								"#cebef0",
-								"#d6c9f2",
-								"#ded4f5",
-								"#e7dff7",
-								"#efe9fa",
-								"#f7f4fc",
+								'#D29CFF',
+								'#C177FF',
+								'#B255FF',
+								'#A436FF',
+								'#971AFF',
+								'#8B00FF',
+								'#7D00E6',
+								'#7100CF',
+								'#6600BA',
+								'#5C00A7',
+								'#530096'
 							],
 							fill: true,
 						},
