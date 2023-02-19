@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import DoughnutChart from "../DoughnutChart/DoughnutChart";
 import BarChart from '../BarChart/BarChart'
 
 import styles from "./AreasVolunteering.module.css";
