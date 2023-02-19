@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../context/context.js";
 import LineChart from "../LineChart/LineChart.jsx";
-import BarChart from "../BarChart/BarChart.jsx";
 
 import styles from "./YearStatistic.module.css";
 
@@ -37,93 +36,46 @@ function YearStatistic() {
 	}, [currentFactor, data]);
 
 	return (
-		<div className={styles.resourceStatistic}>
-			<div className={styles.wrap}>
-				<div className={styles.header}>
-					<h1>Статистика по годам</h1>
-					<select
-						className={styles.select}
-						value={currentFactor}
-						onChange={(e) => {
-							setCurrentFactor(e.target.value);
-						}}
-						>
-						{data.map(({ Factor }, id) => {
-							return (
-								<option key={id} value={id}>
-									{Factor}
-								</option>
-							);
-						})}
-					</select>
-				</div>
-				<LineChart
-					// width={600}
-					// heigth={300}
-					data={{
-						labels: keys,
-						datasets: [
-							{
-								label,
-								data: values,
-								tension: 0.3,
-								backgroundColor: "rgb(157, 125, 224, 0.2)",
-								borderColor: "#9D7DE0",
-								fill: true,
-							},
-						],
+		<div className={styles.wrap}>
+			<div className={styles.header}>
+				<h1>Статистика по годам</h1>
+				<select
+					className={styles.select}
+					value={currentFactor}
+					onChange={(e) => {
+						setCurrentFactor(e.target.value);
 					}}
-					options={{
-						responsive: true,
-						plugins: {
-							legend: false,
-						},
-					}}
-				/>
+				>
+					{data.map(({ Factor }, id) => {
+						return (
+							<option key={id} value={id}>
+								{Factor}
+							</option>
+						);
+					})}
+				</select>
 			</div>
-			<div className={styles.wrap}>
-				<div className={styles.header}>
-					<h1>Статистика по годам</h1>
-					<select
-						className={styles.select}
-						value={currentFactor}
-						onChange={(e) => {
-							setCurrentFactor(e.target.value);
-						}}
-					>
-						{data.map(({ Factor }, id) => {
-							return (
-								<option key={id} value={id}>
-									{Factor}
-								</option>
-							);
-						})}
-					</select>
-				</div>
-				<BarChart
-					// width={600}
-					// heigth={300}
-					data={{
-						labels: keys,
-						datasets: [
-							{
-								label,
-								data: values,
-								tension: 0.3,
-								backgroundColor: "rgb(157, 125, 224, 0.2)",
-								borderColor: "#9D7DE0",
-								fill: true,
-							},
-						],
-					}}
-					options={{
-						responsive: true,
-						plugins: {
-							legend: false,
+			<LineChart
+				data={{
+					labels: keys,
+					datasets: [
+						{
+							label,
+							data: values,
+							tension: 0.3,
+							backgroundColor: "rgb(157, 125, 224, 0.2)",
+							borderColor: "#9D7DE0",
+							fill: true,
 						},
-					}}
-				/>
-			</div>
+					],
+				}}
+				options={{
+					responsive: true,
+					plugins: {
+						legend: false,
+					},
+				}}
+			/>
 		</div>
 	);
 }

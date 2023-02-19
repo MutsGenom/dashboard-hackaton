@@ -1,13 +1,8 @@
-.resourceStatistic{
-    display: flex;
-    justify-content: space-between;
-}
-
 .wrap{
     font-family: 'GT Eesti Pro Display Light';
     font-style: normal;
     font-weight: 300;
-    max-width: 600px;
+    width: 800px;
     height: max-content;
     padding: 25px 20px;
     background-color: white;
@@ -19,6 +14,7 @@
     display: flex;
     gap: 25px;
     align-items: center;
+    justify-content: space-between;
 }
 
 select {
