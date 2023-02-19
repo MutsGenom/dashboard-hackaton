@@ -26,7 +26,7 @@ function BudgetAllocationStatistic() {
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
-				`http://192.168.193.189:7000/dataset/page/${link}/xlsx/Р1`,
+				`http://192.168.193.36:7000/dataset/page/${link}/xlsx/Р1`,
 				{
 					method: "GET",
 				}
@@ -35,13 +35,45 @@ function BudgetAllocationStatistic() {
 			setData(result);
 
 			const regionsData = await fetch(
-				`http://192.168.193.189:7000/dataset/${link}/regions`,
+				`http://192.168.193.36:7000/dataset/${link}/regions`,
 				{
 					method: "GET",
 				}
 			);
 			const regions = JSON.parse(await regionsData.text());
 			setRegions(regions);
+
+			let valuesToChart = [];
+			let labelToChart = [];
+			sortedByRegion.forEach((el) => {
+				if (
+					!el[
+						"Направления реализации государственной молодeжной политики"
+					].startsWith("  ")
+				) {
+					valuesToChart.push(el[metrics[currentMetric]]);
+					if (
+						!el[
+							"Направления реализации государственной молодeжной политики"
+						].endsWith(", в том числе:")
+					) {
+						labelToChart.push(
+							el[
+								"Направления реализации государственной молодeжной политики"
+							]
+						);
+					} else {
+						labelToChart.push(
+							el[
+								"Направления реализации государственной молодeжной политики"
+							].replace(", в том числе:", "")
+						);
+					}
+				}
+			});
+			console.log(sortedByRegion);
+			setValues(sortedByRegion[0][metrics[0]]);
+			setKeys(labelToChart);
 		}
 		getData();
 	}, [link]);
@@ -49,7 +81,7 @@ function BudgetAllocationStatistic() {
 	useEffect(() => {
 		let valuesToChart = [];
 		let labelToChart = [];
-		sortedByRegion.forEach((el, index) => {
+		sortedByRegion.forEach((el) => {
 			if (
 				!el[
 					"Направления реализации государственной молодeжной политики"
@@ -75,6 +107,8 @@ function BudgetAllocationStatistic() {
 				}
 			}
 		});
+		// console.log(valuesToChart);
+		// console.log(labelToChart);
 		setValues(valuesToChart);
 		setKeys(labelToChart);
 	}, [currentRegion, currentMetric, data]);
@@ -122,7 +156,7 @@ function BudgetAllocationStatistic() {
 							<option key={id} value={id}>
 								{metric}
 							</option>
-						);
+						)
 					})}
 				</select>
 			</div>
@@ -133,7 +167,6 @@ function BudgetAllocationStatistic() {
 					labels: keys,
 					datasets: [
 						{
-							label,
 							data: values,
 						},
 					],

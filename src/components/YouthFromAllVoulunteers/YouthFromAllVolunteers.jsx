@@ -6,6 +6,7 @@ import styles from "./YouthFormAllVolunteers.module.css";
 function YouthFromAllVolunteersjsxjsx() {
 	const [youthVolunteers, setYouthVolunteers] = useState(0);
 
+
 	useEffect(() => {
 		async function getData() {
 			const servData = await fetch(
@@ -30,22 +31,26 @@ function YouthFromAllVolunteersjsxjsx() {
 
 	return (
 		<div className={styles.wrap}>
-			<h1>Процент молодежи среди всех волонтеров</h1>
-			<DoughnutChart
-			style={{
-				width: '300px'
-			}}
-				data={{
-					labels: ["Молодёжь", "Остальные"],
-					datasets: [
-						{
-							label: "Процент молодежи среди всех волонтеров",
-							data: [youthVolunteers, 100 - youthVolunteers],
-						},
-					],
+				<h1>Процент молодежи среди всех волонтеров</h1>
+				<DoughnutChart
+				style={{
+					width: '300px'
+					
 				}}
-			/>
+					data={{
+						labels: ["Молодёжь", "Остальные"],
+						datasets: [
+							{
+								label: "Процент молодежи среди всех волонтеров",
+								data: [youthVolunteers, 100 - youthVolunteers],
+								backgroundColor: ['#9d7de0','#f7f4fc'],
+								borderColor: ['#9d7de0','#f7f4fc']
+							},
+						],
+					}}
+				/>
 		</div>
+		
 	);
 }
 
