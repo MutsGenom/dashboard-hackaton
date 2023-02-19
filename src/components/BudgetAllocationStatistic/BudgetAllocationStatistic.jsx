@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./BudgetAllocationStatistic.module.css";
 import BarChart from "../BarChart/BarChart.jsx";
+import { AppContext } from "../../context/context";
+import LineChart from "../LineChart/LineChart";
 
 function BudgetAllocationStatistic() {
+	const [{ link }] = useContext(AppContext);
 	const [data, setData] = useState([]);
 	const [currentRegion, setCurrentRegion] = useState(0);
 	const [currentMetric, setCurrentMetric] = useState(0);
-
 	const [keys, setKeys] = useState([]);
 	const [values, setValues] = useState([]);
 	const [label, setLabel] = useState("");
@@ -25,17 +27,16 @@ function BudgetAllocationStatistic() {
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
-				"http://192.168.193.189:7000/dataset/page/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/xlsx/Р1",
+				`http://192.168.193.36:7000/dataset/page/${link}/xlsx/Р1`,
 				{
 					method: "GET",
 				}
 			);
 			const result = JSON.parse(await serverData.text());
-			console.log(result);
 			setData(result);
 
 			const regionsData = await fetch(
-				"http://192.168.193.189:7000/dataset/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/regions",
+				`http://192.168.193.36:7000/dataset/${link}/regions`,
 				{
 					method: "GET",
 				}
@@ -44,12 +45,11 @@ function BudgetAllocationStatistic() {
 			setRegions(regions);
 		}
 		getData();
-	}, []);
+	}, [link]);
 
 	useEffect(() => {
 		let valuesToChart = [];
 		let labelToChart = [];
-		console.log(sortedByRegion);
 		sortedByRegion.forEach((el, index) => {
 			if (
 				!el[
@@ -75,7 +75,6 @@ function BudgetAllocationStatistic() {
 					);
 				}
 			}
-			console.log(el);
 		});
 		setValues(valuesToChart);
 		setKeys(labelToChart);
@@ -84,8 +83,6 @@ function BudgetAllocationStatistic() {
 	function chooseRegion(region) {
 		let sortedByRegion1 = [];
 		data.forEach((el) => {
-			console.log(el);
-			console.log(regions[region]);
 			if (el["Регион"] == regions[region]) {
 				sortedByRegion1.push(el);
 			}
@@ -131,26 +128,21 @@ function BudgetAllocationStatistic() {
 				</select>
 			</div>
 			<BarChart
-				width={700}
-				height={500}
+				width={100}
+				height={100}
 				data={{
 					labels: keys,
 					datasets: [
 						{
 							label,
 							data: values,
+							backgroundColor: "#b69ee8",
+							borderColor: "#9D7DE0",
 						},
 					],
 				}}
 				options={{
 					responsive: true,
-					// scales: {
-					// 	y: {
-					// 		ticks: {
-					// 			display: false,
-					// 		},
-					// 	},
-					// },
 					plugins: {
 						legend: false,
 					},

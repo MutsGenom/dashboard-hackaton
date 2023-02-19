@@ -1,23 +1,23 @@
 import React, { useRef } from "react";
-import { Doughnut } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import DownloadChartButton from "../DownloadButtons/DownloadChartButton/DownloadChartButton";
 import DownloadTableButton from "../DownloadButtons/DownloadTableButton/DownloadTableButton";
 
-import styles from "./DoughnutChart.module.css";
+import styles from "./PieChart.module.css";
 
-function DoughnutChart({ style, width, heigth, data, options }) {
+function PieChart({ style, width, heigth, data, options }) {
 	let chartRef = useRef(null);
 
 	return (
 		<div style={style}>
-			<Doughnut
+			<Pie
 				width={width}
 				height={heigth}
 				ref={chartRef}
 				data={data}
 				options={options}
-			></Doughnut>
+			></Pie>
 			<div className={styles.footer}>
 				<DownloadChartButton chartRef={chartRef} />
 				<DownloadTableButton chartRef={chartRef} />
@@ -26,4 +26,4 @@ function DoughnutChart({ style, width, heigth, data, options }) {
 	);
 }
 
-export default DoughnutChart;
+export default PieChart;

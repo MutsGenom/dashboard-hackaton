@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AppContext } from "../../context/context.js";
 import LineChart from "../LineChart/LineChart.jsx";
+import BarChart from "../BarChart/BarChart.jsx";
 
 import styles from "./YearStatistic.module.css";
 
 function YearStatistic() {
+	const [{ link }] = useContext(AppContext);
 	const [data, setData] = useState([]);
 	const [currentFactor, setCurrentFactor] = useState(0);
-
 	const [keys, setKeys] = useState([]);
 	const [values, setValues] = useState([]);
 	const [label, setLabel] = useState("");
@@ -14,7 +16,7 @@ function YearStatistic() {
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
-				"http://192.168.193.189:7000/dataset/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/yearsStat/",
+				`http://192.168.193.36:7000/dataset/${link}/yearsStat/`,
 				{
 					method: "GET",
 				}
@@ -24,7 +26,7 @@ function YearStatistic() {
 			setData(result);
 		}
 		getData();
-	}, []);
+	}, [link]);
 
 	useEffect(() => {
 		try {
@@ -35,48 +37,93 @@ function YearStatistic() {
 	}, [currentFactor, data]);
 
 	return (
-		<div className={styles.wrap}>
-			<div className={styles.header}>
-				<h1>Статистика по годам</h1>
-				<select
-					className={styles.select}
-					value={currentFactor}
-					onChange={(e) => {
-						setCurrentFactor(e.target.value);
+		<div className={styles.resourceStatistic}>
+			<div className={styles.wrap}>
+				<div className={styles.header}>
+					<h1>Статистика по годам</h1>
+					<select
+						className={styles.select}
+						value={currentFactor}
+						onChange={(e) => {
+							setCurrentFactor(e.target.value);
+						}}
+						>
+						{data.map(({ Factor }, id) => {
+							return (
+								<option key={id} value={id}>
+									{Factor}
+								</option>
+							);
+						})}
+					</select>
+				</div>
+				<LineChart
+					// width={600}
+					// heigth={300}
+					data={{
+						labels: keys,
+						datasets: [
+							{
+								label,
+								data: values,
+								tension: 0.3,
+								backgroundColor: "rgb(157, 125, 224, 0.2)",
+								borderColor: "#9D7DE0",
+								fill: true,
+							},
+						],
 					}}
-				>
-					{data.map(({ Factor }, id) => {
-						return (
-							<option key={id} value={id}>
-								{Factor}
-							</option>
-						);
-					})}
-				</select>
-			</div>
-			<LineChart
-				width={347}
-				heigth={135}
-				data={{
-					labels: keys,
-					datasets: [
-						{
-							label,
-							data: values,
-							tension: 0.3,
-							backgroundColor: "rgb(157, 125, 224, 0.2)",
-							borderColor: "#9D7DE0",
-							fill: true,
+					options={{
+						responsive: true,
+						plugins: {
+							legend: false,
 						},
-					],
-				}}
-				options={{
-					responsive: true,
-					plugins: {
-						legend: false,
-					},
-				}}
-			/>
+					}}
+				/>
+			</div>
+			<div className={styles.wrap}>
+				<div className={styles.header}>
+					<h1>Статистика по годам</h1>
+					<select
+						className={styles.select}
+						value={currentFactor}
+						onChange={(e) => {
+							setCurrentFactor(e.target.value);
+						}}
+					>
+						{data.map(({ Factor }, id) => {
+							return (
+								<option key={id} value={id}>
+									{Factor}
+								</option>
+							);
+						})}
+					</select>
+				</div>
+				<BarChart
+					// width={600}
+					// heigth={300}
+					data={{
+						labels: keys,
+						datasets: [
+							{
+								label,
+								data: values,
+								tension: 0.3,
+								backgroundColor: "rgb(157, 125, 224, 0.2)",
+								borderColor: "#9D7DE0",
+								fill: true,
+							},
+						],
+					}}
+					options={{
+						responsive: true,
+						plugins: {
+							legend: false,
+						},
+					}}
+				/>
+			</div>
 		</div>
 	);
 }

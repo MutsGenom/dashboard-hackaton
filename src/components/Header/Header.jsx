@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+import { AppContext } from "../../context/context";
 
 import styles from "./Header.module.css";
 
 function Header() {
+	const [{ link }, dispatch] = useContext(AppContext);
 	const filePicker = useRef(null);
 
 	async function handleChange(event) {
@@ -11,13 +13,14 @@ function Header() {
 		formData.append("extension", "xlsx");
 		formData.append("dataset", file);
 
-		const res = await fetch("http://192.168.193.189:7000/dataset", {
+		const res = await fetch("http://192.168.193.36:7000/dataset", {
 			method: "POST",
 			body: formData,
 			redirect: "follow",
 		});
 		const data = await res.text();
-		localStorage.setItem("fileName", data);
+		localStorage.setItem("link", data);
+		dispatch({ type: "SET_LINK", payload: data });
 	}
 
 	function handlePick() {
