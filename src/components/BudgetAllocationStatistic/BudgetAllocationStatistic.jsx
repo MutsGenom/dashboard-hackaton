@@ -43,6 +43,38 @@ function BudgetAllocationStatistic() {
 			);
 			const regions = JSON.parse(await regionsData.text());
 			setRegions(regions);
+
+			let valuesToChart = [];
+			let labelToChart = [];
+			sortedByRegion.forEach((el) => {
+				if (
+					!el[
+						"Направления реализации государственной молодeжной политики"
+					].startsWith("  ")
+				) {
+					valuesToChart.push(el[metrics[currentMetric]]);
+					if (
+						!el[
+							"Направления реализации государственной молодeжной политики"
+						].endsWith(", в том числе:")
+					) {
+						labelToChart.push(
+							el[
+								"Направления реализации государственной молодeжной политики"
+							]
+						);
+					} else {
+						labelToChart.push(
+							el[
+								"Направления реализации государственной молодeжной политики"
+							].replace(", в том числе:", "")
+						);
+					}
+				}
+			});
+			console.log(sortedByRegion);
+			setValues(sortedByRegion[0][metrics[0]]);
+			setKeys(labelToChart);
 		}
 		getData();
 	}, [link]);
@@ -50,7 +82,7 @@ function BudgetAllocationStatistic() {
 	useEffect(() => {
 		let valuesToChart = [];
 		let labelToChart = [];
-		sortedByRegion.forEach((el, index) => {
+		sortedByRegion.forEach((el) => {
 			if (
 				!el[
 					"Направления реализации государственной молодeжной политики"
@@ -76,6 +108,8 @@ function BudgetAllocationStatistic() {
 				}
 			}
 		});
+		// console.log(valuesToChart);
+		// console.log(labelToChart);
 		setValues(valuesToChart);
 		setKeys(labelToChart);
 	}, [currentRegion, currentMetric, data]);
@@ -123,7 +157,7 @@ function BudgetAllocationStatistic() {
 							<option key={id} value={id}>
 								{metric}
 							</option>
-						);
+						)
 					})}
 				</select>
 			</div>
@@ -134,7 +168,6 @@ function BudgetAllocationStatistic() {
 					labels: keys,
 					datasets: [
 						{
-							label,
 							data: values,
 							backgroundColor: "#b69ee8",
 							borderColor: "#9D7DE0",
