@@ -11,6 +11,8 @@ function AreasVolunteering() {
 	const [keys, setKeys]  = useState()
 	const [values, setValues]  = useState()
 
+	const rusCategory = ['Волонтёры', 'Организаторы', 'Мероприятия', 'Проекты']
+
 
 	useEffect(() => {
 		async function getData() {
@@ -58,27 +60,29 @@ function AreasVolunteering() {
 	return (
 		<div>
 			<div className={styles.wrap}>
-				<h1>Направления волонтерства</h1>
-				<div>
-					<select name="" id="" onChange={(e)=>{
-						setCurrentCategory(e.target.value)
-						setNameCategory(e.target.options[e.target.selectedIndex].textContent)
-					}}>
-						{categories ? categories.map((category, id)=>{
-							return (<option key={id} value={id}>{category}</option>)
-						}):null}
-					</select>
+				<div className={styles.header}>
+					<h1>Направления волонтерства</h1>
+					<div>
+						<select name="" id="" onChange={(e)=>{
+							setCurrentCategory(e.target.value)
+							setNameCategory(categories[e.target.selectedIndex])
+						}}>
+							{categories ? rusCategory.map((category, id)=>{
+								return (<option key={id} value={id}>{category}</option>)
+							}):null}
+						</select>
+					</div>
 				</div>
 				<BarChart
 					width={300}
-					height={200}
+					height={300}
 					data={{
 						labels: keys,
 						datasets: [
 							{
 								data: values,
-								backgroundColor: "rgb(157, 125, 224, 0.2)",
-								borderColor: "#9D7DE0"
+								backgroundColor: "#9d7de0",
+								borderColor: "#9d7de0",
 							},
 						],
 					}}

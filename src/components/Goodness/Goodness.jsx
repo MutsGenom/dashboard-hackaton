@@ -7,8 +7,8 @@ import styles from "./Goodness.module.css";
 function Goodness() {
 	return (
 		<div className={styles.goodness}>
-			<YouthFromAllVolunteers />
 			<AreasVolunteering />
+			<YouthFromAllVolunteers />
 		</div>
 	);
 }

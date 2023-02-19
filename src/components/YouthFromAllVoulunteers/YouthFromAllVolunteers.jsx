@@ -18,7 +18,6 @@ function YouthFromAllVolunteersjsxjsx() {
 					},
 				}
 			);
-			console.log(await servData.json());
 			const resp = await servData.json();
 
 			const youthPrecent =
@@ -34,21 +33,30 @@ function YouthFromAllVolunteersjsxjsx() {
 		<div className={styles.wrap}>
 				<h1>Процент молодежи среди всех волонтеров</h1>
 				<DoughnutChart
-				style={{
-					width: '300px'
-					
-				}}
-					data={{
-						labels: ["Молодёжь", "Остальные"],
-						datasets: [
-							{
-								label: "Процент молодежи среди всех волонтеров",
-								data: [youthVolunteers, 100 - youthVolunteers],
-								backgroundColor: ['#9d7de0','#f7f4fc'],
-								borderColor: ['#9d7de0','#f7f4fc']
+						data={{
+							labels: ["Молодёжь", "Остальные"],
+							datasets: [
+								{
+									data: [youthVolunteers, 100 - youthVolunteers],
+									tension: 0.3,
+									backgroundColor: [
+										"#9d7de0",
+										"#f7f4fc",
+									],
+									borderColor: [
+										"#9d7de0",
+										"#f7f4fc",
+									],
+									fill: true,
+								},
+							],
+						}}
+						options={{
+							responsive: true,
+							plugins: {
+								legend: true,
 							},
-						],
-					}}
+						}}
 				/>
 		</div>
 		
