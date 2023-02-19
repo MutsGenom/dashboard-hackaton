@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import styles from "./BudgetAllocationStatistic.module.css";
 import BarChart from "../BarChart/BarChart.jsx";
 import { AppContext } from "../../context/context";
-import LineChart from "../LineChart/LineChart";
 
 function BudgetAllocationStatistic() {
 	const [{ link }] = useContext(AppContext);
@@ -124,7 +123,7 @@ function BudgetAllocationStatistic() {
 	return (
 		<div className={styles.wrap}>
 			<div className={styles.header}>
-				<h1>Распределение бюджета</h1>
+				<h1>Распределение метрик по регионам</h1>
 				<select
 					className={styles.select}
 					value={currentRegion}

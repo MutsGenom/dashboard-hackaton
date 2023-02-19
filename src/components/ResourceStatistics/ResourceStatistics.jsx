@@ -1,12 +1,11 @@
-import { getValue } from "@testing-library/user-event/dist/utils";
-import React from "react";
-import { useState, useEffect } from "react";
-import DoughnutChart from "../DoughnutChart/DoughnutChart";
+import React, { useState, useEffect, useContext } from "react";
 import PieChart from "../PieChart/PieChart";
+import { AppContext } from "../../context/context";
 
 import styles from "./ResourceStatistics.module.css";
 
 function ResourceStatistics() {
+	const [{ link }] = useContext(AppContext);
 	const [indicators, setIndicators] = useState([]);
 	const [modules, setModules] = useState([]);
 
@@ -18,12 +17,15 @@ function ResourceStatistics() {
 	const [values, setValues] = useState();
 	const [data, setData] = useState();
 
-	const niceName = ['Количество государственных учреждений на территории РФ', 'Общая численность граждан, вовлеченных центрами']
+	const niceName = [
+		"Количество государственных учреждений на территории РФ",
+		"Общая численность граждан, вовлеченных центрами",
+	];
 
 	useEffect(() => {
 		async function getData() {
 			const serverData = await fetch(
-				"http://192.168.193.36:7000/dataset/page/cf2801fc-7e96-45b8-9b36-a9cefdcecb82.xlsx/title/Р7",
+				`http://192.168.193.36:7000/dataset/page/${link}/title/Р7`,
 				{
 					method: "GET",
 				}
@@ -102,7 +104,7 @@ function ResourceStatistics() {
 			setKeys(newArray[0][modulesArray[0]]);
 		}
 		getData();
-	}, []);
+	}, [link]);
 
 	useEffect(() => {
 		try {
@@ -127,9 +129,7 @@ function ResourceStatistics() {
 					value={currentFactorModule}
 					onChange={(e) => {
 						setCurrentFactorModule(e.target.value);
-						setActiveModule(
-							modules[e.target.selectedIndex]
-						);
+						setActiveModule(modules[e.target.selectedIndex]);
 						setKeys(
 							indicators[e.target.value][
 								modules[e.target.selectedIndex]
@@ -154,30 +154,30 @@ function ResourceStatistics() {
 							data: data,
 							tension: 0.3,
 							backgroundColor: [
-								'#D29CFF',
-								'#C177FF',
-								'#B255FF',
-								'#A436FF',
-								'#971AFF',
-								'#8B00FF',
-								'#7D00E6',
-								'#7100CF',
-								'#6600BA',
-								'#5C00A7',
-								'#530096'
+								"#D29CFF",
+								"#C177FF",
+								"#B255FF",
+								"#A436FF",
+								"#971AFF",
+								"#8B00FF",
+								"#7D00E6",
+								"#7100CF",
+								"#6600BA",
+								"#5C00A7",
+								"#530096",
 							],
 							borderColor: [
-								'#D29CFF',
-								'#C177FF',
-								'#B255FF',
-								'#A436FF',
-								'#971AFF',
-								'#8B00FF',
-								'#7D00E6',
-								'#7100CF',
-								'#6600BA',
-								'#5C00A7',
-								'#530096'
+								"#D29CFF",
+								"#C177FF",
+								"#B255FF",
+								"#A436FF",
+								"#971AFF",
+								"#8B00FF",
+								"#7D00E6",
+								"#7100CF",
+								"#6600BA",
+								"#5C00A7",
+								"#530096",
 							],
 							fill: true,
 						},
