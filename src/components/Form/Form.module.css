@@ -1,7 +1,5 @@
 .form{
     padding: 30px 50px 30px 30px;
-    /* display: grid;
-    gap: 20px; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

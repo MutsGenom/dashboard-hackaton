@@ -11,7 +11,6 @@ function BudgetAllocationStatistic() {
 	const [currentMetric, setCurrentMetric] = useState(0);
 	const [keys, setKeys] = useState([]);
 	const [values, setValues] = useState([]);
-	const [label, setLabel] = useState("");
 	const [regions, setRegions] = useState([]);
 	const [sortedByRegion, setSortedByRegion] = useState([]);
 
@@ -108,8 +107,6 @@ function BudgetAllocationStatistic() {
 				}
 			}
 		});
-		// console.log(valuesToChart);
-		// console.log(labelToChart);
 		setValues(valuesToChart);
 		setKeys(labelToChart);
 	}, [currentRegion, currentMetric, data]);
@@ -157,7 +154,7 @@ function BudgetAllocationStatistic() {
 							<option key={id} value={id}>
 								{metric}
 							</option>
-						)
+						);
 					})}
 				</select>
 			</div>
