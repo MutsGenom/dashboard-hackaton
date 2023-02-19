@@ -2,7 +2,7 @@
     font-family: 'GT Eesti Pro Display Light';
     font-style: normal;
     font-weight: 300;
-    width: 800px;
+    width: calc(100%/2);
     height: max-content;
     padding: 25px 20px;
     background-color: white;

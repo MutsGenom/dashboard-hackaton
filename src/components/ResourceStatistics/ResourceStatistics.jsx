@@ -186,7 +186,7 @@ function ResourceStatistics() {
 				options={{
 					responsive: true,
 					plugins: {
-						legend: true,
+						// legend: true,
 					},
 				}}
 			/>

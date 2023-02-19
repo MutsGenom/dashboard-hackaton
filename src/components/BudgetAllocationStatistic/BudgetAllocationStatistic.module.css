@@ -1,11 +1,11 @@
-
 .wrap{
+    margin-top: 30px;
+    padding: 25px 20px;
+    width: 100%;
+    height: max-content;
     font-family: 'GT Eesti Pro Display Light';
     font-style: normal;
     font-weight: 300;
-    max-width: 1400px;
-    height: max-content;
-    padding: 25px 20px;
     background-color: white;
     border-radius: 10px;
     filter: drop-shadow(10px 16px 27px rgba(0, 0, 0, 0.1));

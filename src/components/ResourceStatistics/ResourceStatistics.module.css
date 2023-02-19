@@ -5,7 +5,7 @@
     justify-content: center;
     height: max-content;
     font-family: 'GT Eesti Pro Display Light';
-    max-width: 600px;
+    width: calc(100%/2 - 10%);
     height: max-content;
     padding: 25px 20px;
     background-color: white;
